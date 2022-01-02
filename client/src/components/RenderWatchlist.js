@@ -25,7 +25,7 @@ function RenderWatchlist({ promise, user, listBool, setMovieID, setUserMovieID }
   })
 
   function deleteTitle(movie){
-    axios.delete("http://localhost:5000/User/"+userState+"/movie/delete/"+movie._id)
+    axios.delete("/User/"+userState+"/movie/delete/"+movie._id)
       .then((res) => {
         alert("Movie has been deleted from your watchlist.");
         window.location.reload(false);

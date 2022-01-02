@@ -9,7 +9,7 @@ function WatchlistButton({ goSetWatchList, goSetUser, goSetUserPromise, goSetMov
       username: input,
     };
 
-    axios.get("http://localhost:5000/User/")
+    axios.get('/User/')
       .then((res) => {
         var notFound = true;
         res.data.forEach((user) => {
@@ -17,7 +17,7 @@ function WatchlistButton({ goSetWatchList, goSetUser, goSetUserPromise, goSetMov
             goSetWatchList(true);
             goSetUser(user._id);
             goSetMovieID('');
-            goSetUserPromise(axios.get("http://localhost:5000/User/"+user._id));
+            goSetUserPromise(axios.get("/User/"+user._id));
             notFound = false;
             return;
           }

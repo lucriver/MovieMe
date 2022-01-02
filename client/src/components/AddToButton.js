@@ -20,7 +20,7 @@ function AddToButton({ ptitle, pdate, pdescription, pcreator, pgenre, pimage, pw
     }};
 
   function createAndAdd(user,input){
-    axios.get('http://localhost:5000/User/')
+    axios.get('/User/')
     .then((res) => {
       let notFound = true;
       res.data.forEach((user) => {
@@ -36,12 +36,12 @@ function AddToButton({ ptitle, pdate, pdescription, pcreator, pgenre, pimage, pw
             image: pimage,
             movieID: pid
           };
-          axios.post('http://localhost:5000/User/'+id+'/movie/add',movie)
+          axios.post('/User/'+id+'/movie/add',movie)
             .then(res => { return; });
         }
       })
       if(notFound){
-        axios.post('http://localhost:5000/User/add',user)
+        axios.post('/User/add',user)
           .then(res => { return; });
         createAndAdd(user,input);
       }
