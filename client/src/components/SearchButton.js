@@ -46,7 +46,7 @@ function SearchButton({ goSetTitle, goSetDate, goSetDescription, goSetCreator, g
     const movies = axios.get(api_pull + (getRandomInt(5) + 1))
     .then((res) => {
       return res.data.results;
-    });
+    })
     const id = movies.then((res) => {
       const random_index = getRandomInt(19);
       return(res[random_index].id);
@@ -115,7 +115,8 @@ function SearchButton({ goSetTitle, goSetDate, goSetDescription, goSetCreator, g
         }
       })
       .catch((err) => { 
-        return empty 
+        console.clear();
+        return empty; 
       }));
     }
 
