@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon server.js",
-    "heroku-postbuild": "concurrently \"node server.js\" \"cd client && npm install && npm run build\""
+    "heroku-postbuild": "concurrently \"nodemon server.js\" \"cd client && npm install && npm run build\""
   },
   "repository": {
     "type": "git",
