@@ -37,7 +37,10 @@ function AddToButton({ ptitle, pdate, pdescription, pcreator, pgenre, pimage, pw
             movieID: pid
           };
           axios.post('/User/'+id+'/movie/add',movie)
-            .then(res => { return; });
+            .then(res => { 
+              alert('Movie Added!')
+              return; 
+            });
         }
       })
       if(notFound){
