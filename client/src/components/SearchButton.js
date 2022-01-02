@@ -21,6 +21,8 @@ function SearchButton({ goSetTitle, goSetDate, goSetDescription, goSetCreator, g
   };
 
   function handleClick(){
+    console.log(tmdb_capacity);
+    console.log(key);
     goSetWatchList(false);
     switch(goFilter){
       case('Popular'):
