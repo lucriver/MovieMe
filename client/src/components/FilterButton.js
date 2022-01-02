@@ -2,7 +2,7 @@ function FilterButton({ goSetFilter, goFilter }){
 
     const updateFilter = (e) => {
       if(e.target.value == "Random"){
-        alert("ALERT: The Random filter algorithm parses hundreds of thousands of movies. While this filter will show suitable for work content with exceptional accuracy, there is however an EXTREMELY small chance your search result may include content not suitable for work. If you are in such a sensitive environment, please use this feature with caution, or refer back to the Popular filter. Thank you.")
+        alert("ALERT: The Random filter algorithm parses hundreds of thousands of movies. While this filter will show suitable for work content with exceptional accuracy, there is however an EXTREMELY small chance your search result may include content not suitable for work. If you are in such a sensitive environment, please use this feature with caution, or refer back to the other filters. Thank you.")
       }
       goSetFilter(e.target.value);
     }
