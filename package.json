@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start-dev": "concurrently \"cd client && npm start app\" \"node server\""
+    "start-dev": "concurrently \"cd client && npm start app\" \"node server\"",
+    "install-client": "cd client && npm install",
+    "build": "cd client && npm run build",
+    "heroku-postbuild": "npm run install-client && npm run build"
   },
   "repository": {
     "type": "git",
