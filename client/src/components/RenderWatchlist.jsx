@@ -1,7 +1,6 @@
 import React from 'react'
 import { useState, useEffect, useRef } from 'react'
 import { RenderMovie } from '../modules'
-import axios, { Axios } from 'axios'
 
 function usePrevious(value){
   const ref = useRef()
@@ -25,13 +24,23 @@ function RenderWatchlist({ promise, user, go_Set_User_Movie_ID}){
   })
 
   useEffect(() => {
-    setUserID(user)
+    setUserID(user);
     setMovies(promise)
+  })
+
+  useEffect(() => {
+    setMovie({
+      title: '',
+      date: '',
+      description: '',
+      creator: '',
+      genre: '',
+      image: '',
+      movieID: '',
+    })
     go_Set_User_Movie_ID(null)
-  },[promise])
-
-  const prevUser = usePrevious(userID);
-
+  },[userID])
+  
   function handleClick(props){
     go_Set_User_Movie_ID(props.movieID);
     setMovie({ title: props.title, 
@@ -43,7 +52,7 @@ function RenderWatchlist({ promise, user, go_Set_User_Movie_ID}){
                 movieID: props.movieID });
   }
 
-  if(prevUser !== userID){
+  if(movie.title == ''){
     return(
         <ul className="main__watch-list">
           {movies.map(movie => (

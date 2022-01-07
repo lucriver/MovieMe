@@ -5,7 +5,6 @@ function RenderMovie(props){
         <div className="main__body-left--title">{props.movie.title}</div>
         <div className="main__body-left--date">{props.movie.date}</div>
         <div className="main__body-left--description">{props.movie.description}</div>
-        <br/>
         <div className="main__body-left--creator">{props.movie.creator}</div>
         <div className="main__body-left--genre">{props.movie.genre}</div>
       </div>

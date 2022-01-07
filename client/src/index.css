@@ -122,6 +122,45 @@
     border-color: black;
     border: 2.00px solid black;
   }
+  .main__delete-button--user{
+    color: white;
+    background-color: darkorange;
+    padding: 10px 15px;
+    border-radius: 15px;
+    border-color: black;
+    border: 2.00px solid black;
+    font-weight: bolder;
+    font-family: 'Poiret One', sans-serif;
+    font-size: 25px;
+    cursor: pointer;
+  }
+  .main__delete-button--movie{
+    color: white;
+    background-color: darkorange;
+    padding: 10px 15px;
+    border-radius: 15px;
+    border-color: black;
+    border: 2.00px solid black;
+    font-weight: bolder;
+    font-family: 'Poiret One', sans-serif;
+    font-size: 25px;
+    cursor: pointer;
+  }
+  .main__watch-list{
+    background-color: white;
+    padding: 15px;
+    padding-left: 40px;
+    list-style: none;
+  }
+  .main__watch-list--item{
+    background-color: white;
+    font-family: 'Poppins', sans-serif;
+    font-size: 34px;
+    padding: 5px;
+    font-style: italic;
+    font-weight: bold;
+    cursor: pointer;
+  }
   .main__body{
     display: flex;
     justify-content: space-around;
@@ -164,6 +203,7 @@
   }
   .main__body-left--description {
     font-size: 16pt;
+    padding: 0em 0em 1em 0em;
     background-color: white;
   }
   .main__body-left--genre{
@@ -186,20 +226,19 @@
     margin-top: 20px;
   }
 }
-@media screen and (max-width: 411px){
+@media only screen and (max-width: 416px){
   .container{
     padding: 0em 0em 0em 0em;
     box-sizing: none !important;
-    display: table-row;
+    display: flex;
+    flex-direction: column;
   }
 
   .header {
     color: white;
-    margin-left: 1.5em;
     font-family: 'Limelight', sans-serif;
     text-align: center;
     font-size: 3em;
-    margin-top: 4px;
     text-shadow:
         6px 4px 2px #000,
       -1px -1px 0 #000,  
@@ -207,28 +246,30 @@
       -1px 1px 0 #000,
         1px 1px 0 #000;
     cursor: pointer;
+    margin: .1em 0em 0em .3em;
   }
   .main {
     margin-bottom: -5px;
     margin: 15px auto;
     border: 4px solid black;
     padding: 0em;
-    border-radius: 30px;
+    border-radius: 3em;
     background-color: white;
-    max-width: 405px;
-    min-width: 405px;
-    min-height: 900px;
-    max-height: 900px;
-    position: absolute;
-    display: table-row;
-    justify-content: center;
+    max-width: 410px;
+    min-width: 410px;
+    min-height: 890px;
+    max-height: 890px;
+    display: flex;
+    flex-direction: column;
   }
   .main__header {
     display: flex;
+    flex-direction: row;
     justify-content: center;
-    width: fit-content;
+    margin: 0em 0em 0em 0em;
+    padding: 1em 1em 1em 1em;
     align-items: center;
-    gap: .25em;
+    gap: .5em;
     background-color: white;
   }
   .main__select-box{
@@ -305,45 +346,84 @@
     border-color: black;
     border: 2.00px solid black;
   }
+  .main__delete-button--user{
+    color: white;
+    background-color: darkorange;
+    padding: .6em .1em;
+    border-radius: 15px;
+    border-color: black;
+    border: 2.00px solid black;
+    font-weight: bolder;
+    font-family: 'Poiret One', sans-serif;
+    font-size: 1.25em;
+    cursor: pointer;
+  }
+  
+  .main__delete-button--movie{
+    color: white;
+    background-color: darkorange;
+    padding: .6em .1em;
+    border-radius: 15px;
+    border-color: black;
+    border: 2.00px solid black;
+    font-weight: bolder;
+    font-family: 'Poiret One', sans-serif;
+    font-size: 1.25em;
+    cursor: pointer;
+  }
+  .main__watch-list{
+    background-color: white;
+    padding: 15px;
+    padding-left: 40px;
+    list-style: none;
+  }
+  .main__watch-list--item{
+    background-color: white;
+    font-family: 'Poppins', sans-serif;
+    font-size: 34px;
+    padding: 5px;
+    font-style: italic;
+    font-weight: bold;
+    cursor: pointer;
+  }
   .main__body-container{
-    max-height: 30em;
-    max-width: 25em;
-    min-width: 25em;
-    min-height: 30em;
-    width: fit-content;
-    height: fit-content;
-    margin-top: 5em;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    flex-shrink: 0;
+    overflow: auto;
   }
   .main__body{
     display: flex;
     flex-direction: column;
-    align-items: center;
-    align-content: center;
     justify-content: center;
-    margin-bottom: 1em;
-    margin-top: 6em;
+    margin: 1em 0em 0em 0em;
+    padding: 0em 1em 0em 1em;
     background-color: white;
-    padding: 5px;
-    max-height: 30em;
-    max-width: 25em;
-    min-width: 25em;
-    min-height: 30em;
+    max-height: fit-content;
+    max-width: 400px;
+    min-width: 0px;
+    min-height: 0px;
+    flex-shrink: 0;
     border: none;
   }
   .main__body-left{
     font-family: 'Poppins', sans-serif;
-    max-width: fit-content;
     max-height: fit-content;
-    min-width: fit-content;
-    min-height: fit-content;
-    padding-left: 1em;
-    margin-top:  5em;
-    margin-bottom: 0em;
+    max-width: 345px;
+    min-width: 0px;
+    min-height: 0px;
+    padding: 0em 0em 0em 0em;
+    margin: 0em 0em 0em 0em;
     background-color: white;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
   }
   .main__body-left--title{
     background-color: white;
-    font-size: 1em;
+    font-size: 1.75em;
     font-weight: bold;
     font-style: italic;
   }
@@ -354,12 +434,13 @@
   }
   .main__body-left--date {
     background-color: white;
-    font-size: 1em;
+    font-size: 1.4em;
     font-weight: bold;
   }
   .main__body-left--description {
-    font-size: 1em;
+    font-size: 1.0em;
     background-color: white;
+    padding: 0em 0em 1em 0;
   }
   .main__body-left--genre{
     font-size: 1em;
@@ -368,12 +449,15 @@
   .main__body-right{
     background-color: white;
     max-height: 300px;
-    min-height: 300px;
-    min-width: auto;
-    max-width: auto;
+    min-height: 0px;
+    min-width: 0px;
+    max-width: fit-content;
+    margin: 1em 0em 1em 0em;
     border: none;
     background-size: auto;
-    margin-bottom: 2em;
+    position: relative !important;
+    display: flex;
+    justify-content: center;
   }
   .main__body-right--image{
     background-color: white;
@@ -383,9 +467,13 @@
     max-width: auto;
     background-size: auto;
     overflow: hidden;
+    margin: 0em 0em 0em 0em !important;
+    margin-top: 0em;
   }
   .footer {
     display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     margin-top: -15px;
@@ -398,9 +486,9 @@
      -1px 1px 0 #000,
       1px 1px 0 #000;
     color: white;
-    gap: 1em;
-    padding: 1em;
-    margin-top: 2em;
+    gap: 0em;
+    padding: 0em;
+    margin: 0em 0em 0em 0em
   }
 }
 
@@ -428,49 +516,6 @@
   margin-top: 10px;
 }
 
-.main__delete-button--user{
-  color: white;
-  background-color: darkorange;
-  padding: 10px 15px;
-  border-radius: 15px;
-  border-color: black;
-  border: 2.00px solid black;
-  font-weight: bolder;
-  font-family: 'Poiret One', sans-serif;
-  font-size: 25px;
-  cursor: pointer;
-}
-
-.main__delete-button--movie{
-  color: white;
-  background-color: darkorange;
-  padding: 10px 15px;
-  border-radius: 15px;
-  border-color: black;
-  border: 2.00px solid black;
-  font-weight: bolder;
-  font-family: 'Poiret One', sans-serif;
-  font-size: 25px;
-  cursor: pointer;
-}
-
-
-.main__watch-list{
-  background-color: white;
-  padding: 15px;
-  padding-left: 40px;
-  list-style: none;
-}
-
-.main__watch-list--item{
-  background-color: white;
-  font-family: 'Poppins', sans-serif;
-  font-size: 34px;
-  padding: 5px;
-  font-style: italic;
-  font-weight: bold;
-  cursor: pointer;
-}
 
 
 
