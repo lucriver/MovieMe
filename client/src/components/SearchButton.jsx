@@ -1,25 +1,26 @@
 import axios from 'axios'
+import { keyBy } from 'lodash';
 import { useEffect, useState } from 'react';
 
 function SearchButton({ goSetMovie, filterValue, goSetWatchList}){
-  const[key, setKey] = useState('');
-
   const tmdb = "https://api.themoviedb.org/3/movie/";
   const poster_path = 'https://image.tmdb.org/t/p/original';
   const tmdb_capacity = process.env.REACT_APP_CAP;
-
-  useEffect(() => {
-    axios.get(process.env.REACT_APP_K)
-      .then((res) => {
-        setKey(res.data);
-      })
-  })
 
   function getRandomInt(max){
     return Math.floor(Math.random() * max);
   };
 
-  function handleClick(){
+  // API call to server for key, this approach enables rate limiting.
+  function handleClick(){ 
+    axios.get(process.env.REACT_APP_K)
+    .then((res) => {
+      return queryMovie(res.data)
+    })
+    .catch((err) => alert("To prevent abuse of The Movie Database API, we have prevented your search query. Please try again later."));
+  }
+
+  function queryMovie(key){
     goSetWatchList(false);
     switch(filterValue){
       case('Popular'):
@@ -27,20 +28,20 @@ function SearchButton({ goSetMovie, filterValue, goSetWatchList}){
       case('Upcoming'):{
         let filter = filterValue.toLowerCase();
         filter = filter.replace(/\s/g, '_');
-        const id = getIdStandard(filter)
+        const id = getIdStandard(filter,key)
         id.then((res) => {
-          getMovieObject(res)
+          getMovieObject(res,key)
         })
         break;
       }
       case('Random'):{
-        const id = getIdRandomized();
-        id.then((res) => { getMovieObject(res)})
+        const id = getIdRandomized(key);
+        id.then((res) => { getMovieObject(res,key)})
       }
     }
   }
 
-  function getIdStandard(filter){
+  function getIdStandard(filter,key){
     const api_pull = tmdb + filter + key + '&page=';
     const movies = axios.get(api_pull + (getRandomInt(5) + 1))
     .then((res) => {
@@ -55,7 +56,7 @@ function SearchButton({ goSetMovie, filterValue, goSetWatchList}){
     })
   }
 
-  function getIdRandomized(){
+  function getIdRandomized(key){
     const upper_bound = 25;
     const lower_bound = 25;
     let random = getRandomInt(tmdb_capacity);
@@ -100,7 +101,7 @@ function SearchButton({ goSetMovie, filterValue, goSetWatchList}){
       })
   };
 
-  function getMovieObject(id){
+  function getMovieObject(id,key){
     console.log("Pulling: "+id);
     axios.get(tmdb + id + key)
       .then((res) => {

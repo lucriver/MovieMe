@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 require('dotenv').config();
 
 const app = express();
+const rateLimit = require('express-rate-limit');
 const port = process.env.PORT || 8080;
 
 //---
@@ -22,6 +23,12 @@ connection.once('open', () => {
   console.log("MongoDB database connection established.");
 })
 
+const apiRequestLimiter = rateLimit({
+  windowMs: 180000,
+  max: 50,
+  message: "To prevent abuse of TMDB API, your request could not be completed. Please try again shortly."
+});
+
 const userRoutes = require('./routes/User.route.js')
 
 // --- API
@@ -31,7 +38,8 @@ const api_key_path = process.env.API_KEY_PATH;
 
 app.use('/users', userRoutes);
 
-app.get((api_key_path), (req,res) => {
+
+app.get(api_key_path,apiRequestLimiter, (req,res) => {
   res.send(api_key);
 })
 
