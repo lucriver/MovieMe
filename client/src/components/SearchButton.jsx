@@ -1,6 +1,4 @@
 import axios from 'axios'
-import { keyBy } from 'lodash';
-import { useEffect, useState } from 'react';
 
 function SearchButton({ goSetMovie, filterValue, goSetWatchList}){
   const tmdb = "https://api.themoviedb.org/3/movie/";
