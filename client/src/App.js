@@ -1,60 +1,42 @@
-import React from 'react'
+import React, { Component, useEffect } from 'react'
 import { useState } from 'react'
 import { default as logo} from './tmdblogo.svg'
-import './index.css'
-import SearchButton from './components/SearchButton'
-import FilterButton from './components/FilterButton'
-import BodyData from './components/BodyData'
-import AddToButton from './components/AddToButton'
-import WatchlistButton from './components/WatchlistButton'
-import DeleteButton from './components/DeleteButton'
+import './index.css';
+import { FilterButton, WatchlistButton, DeleteButton, AddToButton, SearchButton, BodyData }  from './modules'
 
-function App(){
-  const[title, setTitle] = useState('');
-  const[date, setDate] = useState('');
-  const[description, setDescription] = useState('');
-  const[creator, setCreator] = useState('');
-  const[genre, setGenre] = useState('');
-  const[image, setImage] = useState('');
-  const[movieID, setMovieID] = useState('');
+export default function App(){
+  const[movie, setMovie] = useState({
+    title: '',
+    date: '',
+    description: '',
+    creator: '',
+    genre: '',
+    image: '',
+    movieID: '',
+  })
   const[filter, setFilter] = useState('Popular');
   const[watchList, setWatchList] = useState(false); 
   const[user, setUser] = useState(null);
-  const[userMovieID, setUserMovieID] = useState('');
+  const[userMovieID, setUserMovieID] = useState(null);
   const[userPromise, setUserPromise] = useState([]);
 
   return (
-    <div>
+    <div className="container">
       <header className="header" onClick={() => window.location.reload(false)}>
         Movie Me!
       </header>
     <div className="main">
       <div className="main__header">
-        <FilterButton 
-          goSetFilter={setFilter} goFilter={filter} 
-          />
-        <WatchlistButton 
-          goSetUser={setUser} goSetWatchList={setWatchList} 
-          goSetUserPromise={setUserPromise} goSetMovieID={setMovieID} inWatchList={watchList}
-          />
-        <DeleteButton 
-          isWatchList={watchList} userID={user} movieID={movieID} userMovieID={userMovieID}
-         />
-        <AddToButton 
-          ptitle={title} pdate={date} pdescription={description} 
-          pcreator={creator} pgenre={genre} pimage={image} pid={movieID} pwatchList={watchList} 
-          />
-        <SearchButton 
-          goSetTitle={setTitle} goSetDate={setDate} goSetDescription={setDescription}
-          goSetCreator={setCreator} goSetGenre={setGenre} goSetImage={setImage}
-          goSetMovieID={setMovieID} goFilter={filter} goSetWatchList={setWatchList} 
-          />
+        <FilterButton    goSetFilter={setFilter} filterValue={filter}/>
+        <WatchlistButton goSetUser={setUser} goSetWatchList={setWatchList} goSetUserPromise={setUserPromise}/>
+        <DeleteButton    isWatchList={watchList} valueUser={user} movieID={userMovieID}/>
+        <AddToButton     movieObject={movie} isWatchList={watchList}/>
+        <SearchButton    goSetMovie={setMovie} filterValue={filter} goSetWatchList={setWatchList}/>
       </div>
-      <BodyData 
-        bodyTitle={title} bodyDate={date} bodyDescription={description}
-        bodyCreator={creator} bodyGenre={genre} bodyImage={image} watchListBool={watchList} 
-        bodyPromise={userPromise} bodyUser={user} goSetMovieID={setMovieID} goSetUserMovieID={setUserMovieID}
-        />
+      <div className="main__body-container">
+        <BodyData movieObject={movie} isWatchList={watchList} promiseValue={userPromise} 
+                  userValue={user} goSetUserMovieID={setUserMovieID}/>
+      </div>
     </div>
     <footer className="footer">
       <div onClick={() => {window.open("https://www.lucasrh.com/#","_blank")}} style={{cursor:'pointer'}}>
@@ -70,4 +52,3 @@ function App(){
   )
 }
 
-export default App;

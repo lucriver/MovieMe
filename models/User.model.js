@@ -3,7 +3,7 @@ const Schema = mongoose.Schema
 
 const userSchema = new Schema (
     {
-        username: { type: String, required: true},
+        username: { type: String, lowercase: true, required: true },
         movies: [{
             title: { type: String },
             date: { type: String },
@@ -11,7 +11,7 @@ const userSchema = new Schema (
             creator: { type: String },
             genre: { type: String },
             image: { type: String },
-            movieID: { type: String}
+            movieID: { type: String }
         }]
     }
 );

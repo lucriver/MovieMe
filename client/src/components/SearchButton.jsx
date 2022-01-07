@@ -1,8 +1,7 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react';
 
-
-function SearchButton({ goSetTitle, goSetDate, goSetDescription, goSetCreator, goSetGenre, goSetImage, goFilter, goSetWatchList, goSetMovieID }){
+function SearchButton({ goSetMovie, filterValue, goSetWatchList}){
   const[key, setKey] = useState('');
 
   const tmdb = "https://api.themoviedb.org/3/movie/";
@@ -15,18 +14,18 @@ function SearchButton({ goSetTitle, goSetDate, goSetDescription, goSetCreator, g
         setKey(res.data);
       })
   })
-    
+
   function getRandomInt(max){
     return Math.floor(Math.random() * max);
   };
 
   function handleClick(){
     goSetWatchList(false);
-    switch(goFilter){
+    switch(filterValue){
       case('Popular'):
       case('Top Rated'):
       case('Upcoming'):{
-        let filter = goFilter.toLowerCase();
+        let filter = filterValue.toLowerCase();
         filter = filter.replace(/\s/g, '_');
         const id = getIdStandard(filter)
         id.then((res) => {
@@ -54,37 +53,6 @@ function SearchButton({ goSetTitle, goSetDate, goSetDescription, goSetCreator, g
     return id.then((res) => { 
       return res;
     })
-  }
-  
-  function getMovieObject(id){
-    console.log("Pulling: "+id);
-    axios.get(tmdb + id + key)
-      .then((res) => {
-        if(res.data.adult == true)
-          return
-        let full_date = res.data.release_date;
-        let date = full_date.substring(0,4);
-        let image = poster_path + res.data.poster_path;
-        let genre = "Genre(s): ";
-        for(let i=0;i<(res.data.production_companies).length;i++){
-          if(res.data.production_companies[i].origin_country == ''){ 
-            continue; 
-          }
-          var origin = "Origin: " + res.data.production_companies[i].origin_country;
-        }
-        if(origin == {})
-          origin = "Origin: " + res.data.production_countries[0].name ;
-        for(let i=0;i<(res.data.genres).length;i++)
-          genre = genre + res.data.genres[i].name + ", " 
-        goSetTitle(res.data.title);
-        goSetDate(date);
-        goSetDescription(res.data.overview);
-        goSetCreator(origin);
-        goSetGenre(genre);
-        goSetImage(image);
-        goSetMovieID(id);
-      })
-      .catch((err) => console.log(err));
   }
 
   function getIdRandomized(){
@@ -132,12 +100,37 @@ function SearchButton({ goSetTitle, goSetDate, goSetDescription, goSetCreator, g
       })
   };
 
-return(
-    <button className="main__search-button" 
-        onClick={() => handleClick()}>
-        Search!
-  </button>
-  );
-}
+  function getMovieObject(id){
+    console.log("Pulling: "+id);
+    axios.get(tmdb + id + key)
+      .then((res) => {
+        if(res.data.adult == true)
+          return
+        let full_date = res.data.release_date;
+        let date = full_date.substring(0,4);
+        let image = poster_path + res.data.poster_path;
+        let genre = "Genre(s): ";
+        for(let i=0;i<(res.data.production_companies).length;i++){
+          if(res.data.production_companies[i].origin_country == ''){ 
+            continue; 
+          }
+          var origin = "Origin: " + res.data.production_companies[i].origin_country;
+        }
+        if(origin == {})
+          origin = "Origin: " + res.data.production_countries[0].name ;
+        for(let i=0;i<(res.data.genres).length;i++)
+          genre = genre + res.data.genres[i].name + ", " 
+        goSetMovie({ title: res.data.title, date: date, description: res.data.overview,
+                    creator: origin, genre: genre, image: image, movieID: id });
+      })
+      .catch((err) => console.log(err));
+  }
 
+  return(
+    <button className="main__search-button" onClick={() => handleClick()}>
+      Search!
+    </button>
+  )
+
+}
 export default SearchButton

@@ -29,7 +29,7 @@ const api_key = process.env.API_KEY;
 const api_key_path = process.env.API_KEY_PATH;
 //
 
-app.use('/user', userRoutes);
+app.use('/users', userRoutes);
 
 app.get((api_key_path), (req,res) => {
   res.send(api_key);
